@@ -14,6 +14,7 @@ namespace Demo2Application.Services
         private readonly IRegisterCommandHandler _registerRider;
         private readonly ITripService _tripService;
         private readonly IQueryService _queryService;
+
         public RiderService()
         {
             _registerRider = new RegisterCommandHandler();
@@ -23,7 +24,7 @@ namespace Demo2Application.Services
 
         public void Register(Rider rider)
         {
-           var ans = _registerRider.RegisterRider(new RegisterRiderCommand(rider));
+            var ans = _registerRider.RegisterRider(new RegisterRiderCommand(rider));
             if (ans)
             {
                 Console.WriteLine($"Rider {rider.RiderId} with name {rider.RiderName} has been registered.");
@@ -38,6 +39,20 @@ namespace Demo2Application.Services
         public List<Trip> GetRiderHistory(int riderId)
         {
             return _queryService.GetRiderHistory(new GetQuery(riderId));
+        }
+
+        public Rider GetRiderData(int riderId)
+        {
+            var fetchedRider = new Rider();
+            try
+            {
+                fetchedRider = _queryService.GetRider(new GetQuery(riderId));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return fetchedRider;
         }
     }
 }

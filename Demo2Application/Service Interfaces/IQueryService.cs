@@ -7,5 +7,9 @@ namespace Demo2Application.Interfaces
     public interface IQueryService
     {
         List<Trip> GetRiderHistory(GetQuery getRiderHistory);
+
+        Rider GetRider(GetQuery getRiderInfo);
+
+        Cab GetCabDriver(Rider riderInfo);
     }
 }

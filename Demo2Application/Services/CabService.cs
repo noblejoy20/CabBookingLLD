@@ -2,6 +2,7 @@
 using Demo2Application.Commands;
 using Demo2Application.Interfaces;
 using Demo2Application.Models;
+using Demo2Application.QueryHandlers;
 using System;
 
 namespace Demo2Application.Services
@@ -11,12 +12,14 @@ namespace Demo2Application.Services
         private readonly IRegisterCommandHandler _registerDriver;
         private readonly IUpdateCommandHandler _updateLocation;
         private readonly IUpdateAvailabilityCommandHandler _updateAvailability;
+        private readonly IQueryService _queryService;
 
         public CabService()
         {
             _registerDriver = new RegisterCommandHandler();
             _updateLocation = new UpdateLocationCommandHandler();
             _updateAvailability = new ToggleAvailabilityCommandHandler();
+            _queryService = new GetQueriesHandler();
         }
 
         public void Register(Cab cab)
@@ -48,6 +51,20 @@ namespace Demo2Application.Services
             {
                 Console.WriteLine($"Driver Availability status has not been changed.");
             }
+        }
+
+        public Cab GetAvailableCab(Rider riderData)
+        {
+            var newCab = new Cab();
+            try
+            {
+                newCab = _queryService.GetCabDriver(riderData);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return newCab;
         }
     }
 }

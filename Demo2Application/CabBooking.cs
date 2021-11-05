@@ -31,29 +31,38 @@ namespace Demo2Application
                     case 1:
                         riderService.Register(inputService.GetRiderDetails());
                         break;
+
                     case 2:
                         cabService.Register(inputService.GetCabDetails());
                         break;
+
                     case 3:
                         var result = inputService.GetLocationDetailsOfCab();
                         cabService.UpdateCabLocation(result.Item1, result.Item2);
                         break;
+
                     case 4:
                         var cabId = inputService.GetCabId();
                         cabService.ToggleAvailability(cabId);
                         break;
+
                     case 5:
                         var riderId = inputService.GetRiderId();
                         riderService.GetRiderHistory(riderId);
                         break;
+
                     case 6:
+                        riderId = inputService.GetRiderId();
+                        var riderData = riderService.GetRiderData(riderId);
+                        var availableCab = cabService.GetAvailableCab(riderData);
+                        var destination = inputService.GetLocation();
+                        tripService.BookTrip(riderData, availableCab, destination);
                         break;
+
                     case 7:
                         cabId = inputService.GetCabId();
                         tripService.CancelTrip(cabId);
                         break;
-
-
                 }
             }
         }

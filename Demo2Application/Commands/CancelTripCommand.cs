@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Demo2Application.Commands
+﻿namespace Demo2Application.Commands
 {
     public class CancelTripCommand
     {

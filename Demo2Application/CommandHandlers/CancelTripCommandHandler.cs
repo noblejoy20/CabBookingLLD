@@ -11,10 +11,12 @@ namespace Demo2Application.CommandHandlers
     public class CancelTripCommandHandler : CarBookingBase, ICancelTripCommandHandler
     {
         private readonly List<Trip> _tripsInProgress;
+
         public CancelTripCommandHandler()
         {
             _tripsInProgress = TripsInProgress;
         }
+
         public bool CancelTrip(CancelTripCommand cancelTrip)
         {
             var trip = _tripsInProgress.FirstOrDefault(x => x.Cab.CabId == cancelTrip.CabId);

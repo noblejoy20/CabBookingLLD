@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Demo2Application.Services
 {
@@ -14,7 +13,7 @@ namespace Demo2Application.Services
             string name = Console.ReadLine();
             Console.WriteLine("Enter the coordinates:\t");
             string coordinates = Console.ReadLine();
-            var output = coordinates.Split(' ').Select(x=>Convert.ToInt32(x)).ToList();
+            var output = coordinates.Split(' ').Select(x => Convert.ToInt32(x)).ToList();
             Console.WriteLine("Enter the location:\t");
             string locationName = Console.ReadLine();
             return new Rider(name, output, locationName);
@@ -24,23 +23,25 @@ namespace Demo2Application.Services
         {
             Console.WriteLine("Enter the name of the Driver:\t");
             string name = Console.ReadLine();
-            Console.WriteLine("Enter the coordinates:\t");
-            string coordinates = Console.ReadLine();
-            var output = coordinates.Split(' ').Select(x => Convert.ToInt32(x)).ToList();
-            Console.WriteLine("Enter the location:\t");
-            string locationName = Console.ReadLine();
-            return new Cab(name, output, locationName);
+            var location = GetLocation();
+            return new Cab(name, new List<int>() { location.Coordinates.Item1, location.Coordinates.Item2 }, location.LocationName);
         }
 
-        public (int,Location) GetLocationDetailsOfCab()
+        public (int, Location) GetLocationDetailsOfCab()
         {
-            var Id=GetCabId();
+            var Id = GetCabId();
+            var location = GetLocation();
+            return (Id, location);
+        }
+
+        public Location GetLocation()
+        {
             Console.WriteLine("Enter the coordinates:\t");
             string coordinates = Console.ReadLine();
             var output = coordinates.Split(' ').Select(x => Convert.ToInt32(x)).ToList();
             Console.WriteLine("Enter the location:\t");
             string locationName = Console.ReadLine();
-            return (Id, new Location(output, locationName));
+            return new Location(output, locationName);
         }
 
         public int GetCabId()
@@ -49,12 +50,12 @@ namespace Demo2Application.Services
             int Id = Convert.ToInt32(Console.ReadLine());
             return Id;
         }
+
         public int GetRiderId()
         {
             Console.WriteLine("Enter the rider Id whose history needs to be fetched:\t");
             int Id = Convert.ToInt32(Console.ReadLine());
             return Id;
         }
-
     }
 }
