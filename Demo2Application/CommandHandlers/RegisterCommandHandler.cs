@@ -17,14 +17,16 @@ namespace Demo2Application.CommandHandlers
             _drivers = Drivers;
         }
 
-        public void RegisterRider(RegisterRiderCommand registerCommand)
+        public bool RegisterRider(RegisterRiderCommand registerCommand)
         {
             _riders.Add(registerCommand.Rider);
+            return true;
         }
 
-        public void RegisterDriver(RegisterCabCommand registerCommand)
+        public bool RegisterDriver(RegisterCabCommand registerCommand)
         {
             _drivers.Add(registerCommand.Cab);
+            return true;
         }
     }
 }

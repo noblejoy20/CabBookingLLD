@@ -23,6 +23,7 @@ namespace Demo2Application.CommandHandlers
             bookCommand.Trip.Price = _helper.CalculatePrice(bookCommand.Trip.Origin, bookCommand.Trip.Destination, perKMprice);
             _trips.Add(bookCommand.Trip);
             bookCommand.Trip.Cab.Location = bookCommand.Trip.Rider.Location = bookCommand.Trip.Destination;
+            bookCommand.Trip.Rider.TripsTaken.Add(bookCommand.Trip);
             return true;
         }
     }
