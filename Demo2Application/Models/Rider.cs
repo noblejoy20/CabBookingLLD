@@ -15,6 +15,7 @@ namespace Demo2Application.Models
             RiderName = riderName;
             RiderId = Identity++;
             Location = new Location(coordinates, locationName);
+            TripsTaken = new List<Trip>();
         }
 
         public int RiderId { get; set; }

@@ -24,7 +24,11 @@ namespace Demo2Application.Services
 
         public void Register(Cab cab)
         {
-            _registerDriver.RegisterDriver(new RegisterCabCommand(cab));
+            var ans = _registerDriver.RegisterDriver(new RegisterCabCommand(cab));
+            if (ans)
+            {
+                Console.WriteLine($"Cab {cab.CabId} with name {cab.DriverName} has been registered.");
+            }
         }
 
         public void UpdateCabLocation(int cabId, Location loc)
